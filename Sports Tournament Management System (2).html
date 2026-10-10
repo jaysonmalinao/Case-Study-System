@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SK Pinagbuhatan Tournament Manager</title>
+</head>
+<body>
+
+    <h2>SK Pinagbuhatan Tournament Manager</h2>
+    <p>Sports Tournament Management System</p>
+
+    <hr>
+
+    <nav>
+        <button onclick="showPage('login')">Login</button>
+        <button onclick="showPage('dashboard')">Dashboard</button>
+        <button onclick="showPage('tournaments')">Tournament Management</button>
+        <button onclick="showPage('teams')">Teams</button>
+        <button onclick="showPage('matches')">Match Scheduling</button>
+        <button onclick="showPage('standings')">Standings</button>
+        <button onclick="showPage('venues')">Venues</button>
+        <button onclick="showPage('reports')">Reports</button>
+        <button onclick="showPage('settings')">Settings</button>
+        <button onclick="logout()">Logout</button>
+    </nav>
+
+    <hr>
+
+    <!-- LOGIN -->
+    <section id="login">
+        <h3>Login</h3>
+
+        <form onsubmit="event.preventDefault(); showPage('dashboard');">
+            <p>Email Address:</p>
+            <input type="email" required>
+
+            <p>Password:</p>
+            <input type="password" required>
+
+            <p>
+                <button type="submit">Sign In</button>
+            </p>
+        </form>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" hidden>
+        <h3>Dashboard</h3>
+
+        <p>Total Tournaments: 3</p>
+        <p>Total Teams: 16</p>
+        <p>Matches Scheduled: 30</p>
+        <p>Matches Completed: 18</p>
+
+        <h3>Recent Matches</h3>
+
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>Match ID</th>
+                <th>Team 1</th>
+                <th>Team 2</th>
+                <th>Score</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>M001</td>
+                <td>Pasig Titans</td>
+                <td>San Joaquin</td>
+                <td>68-59</td>
+                <td>Live</td>
+            </tr>
+            <tr>
+                <td>M002</td>
+                <td>Rizal Alumni</td>
+                <td>Manggahan United</td>
+                <td>88-72</td>
+                <td>Completed</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- TOURNAMENT MANAGEMENT -->
+    <section id="tournaments" hidden>
+        <h3>Tournament Management</h3>
+
+        <form onsubmit="addTournament(event)">
+            <p>Tournament Name:</p>
+            <input id="tournamentName" required>
+
+            <p>Sport:</p>
+            <select id="sport">
+                <option>Basketball</option>
+                <option>Volleyball</option>
+                <option>Badminton</option>
+                <option>Football</option>
+            </select>
+
+            <button type="submit">Add Tournament</button>
+        </form>
+
+        <h3>Tournament List</h3>
+
+        <table border="1" cellpadding="5" id="tournamentTable">
+            <tr>
+                <th>ID</th>
+                <th>Tournament Name</th>
+                <th>Sport</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>T001</td>
+                <td>Summer League 2026</td>
+                <td>Basketball</td>
+                <td>Active</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- TEAMS -->
+    <section id="teams" hidden>
+        <h3>Team Management</h3>
+
+        <form onsubmit="addTeam(event)">
+            <p>Team Name:</p>
+            <input id="teamName" required>
+            <button type="submit">Add Team</button>
+        </form>
+
+        <h3>Registered Teams</h3>
+
+        <table border="1" cellpadding="5" id="teamTable">
+            <tr>
+                <th>Team ID</th>
+                <th>Team Name</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>TM001</td>
+                <td>Pasig Titans</td>
+                <td>Active</td>
+            </tr>
+            <tr>
+                <td>TM002</td>
+                <td>San Joaquin Warriors</td>
+                <td>Active</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- MATCH SCHEDULING -->
+    <section id="matches" hidden>
+        <h3>Match Scheduling</h3>
+
+        <form onsubmit="addMatch(event)">
+            <p>Team 1:</p>
+            <input id="team1" required>
+
+            <p>Team 2:</p>
+            <input id="team2" required>
+
+            <p>Match Date:</p>
+            <input type="date" id="matchDate" required>
+
+            <p>Venue:</p>
+            <input id="matchVenue" required>
+
+            <p><button type="submit">Schedule Match</button></p>
+        </form>
+
+        <table border="1" cellpadding="5" id="matchTable">
+            <tr>
+                <th>Match ID</th>
+                <th>Team 1</th>
+                <th>Team 2</th>
+                <th>Date</th>
+                <th>Venue</th>
+            </tr>
+        </table>
+    </section>
+
+    <!-- STANDINGS -->
+    <section id="standings" hidden>
+        <h3>Tournament Standings</h3>
+
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>Rank</th>
+                <th>Team Name</th>
+                <th>Played</th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>Points</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Pasig Titans</td>
+                <td>5</td>
+                <td>5</td>
+                <td>0</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>San Joaquin Warriors</td>
+                <td>5</td>
+                <td>4</td>
+                <td>1</td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Rizal Alumni</td>
+                <td>5</td>
+                <td>3</td>
+                <td>2</td>
+                <td>6</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- VENUES -->
+    <section id="venues" hidden>
+        <h3>Venue Management</h3>
+
+        <form onsubmit="addVenue(event)">
+            <p>Venue Name:</p>
+            <input id="venueName" required>
+
+            <p>Location:</p>
+            <input id="venueLocation" required>
+
+            <button type="submit">Add Venue</button>
+        </form>
+
+        <table border="1" cellpadding="5" id="venueTable">
+            <tr>
+                <th>Venue ID</th>
+                <th>Venue Name</th>
+                <th>Location</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>V001</td>
+                <td>Pasig City Gymnasium</td>
+                <td>Pasig City</td>
+                <td>Available</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- REPORTS -->
+    <section id="reports" hidden>
+        <h3>Tournament Reports</h3>
+
+        <p>Total Tournaments: 3</p>
+        <p>Total Registered Teams: 16</p>
+        <p>Matches Completed: 18</p>
+        <p>Matches Remaining: 12</p>
+
+        <button onclick="window.print()">Print Report</button>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="settings" hidden>
+        <h3>System Settings</h3>
+
+        <form onsubmit="saveSettings(event)">
+            <p>System Name:</p>
+            <input id="systemName" value="SK Pinagbuhatan Tournament Manager" required>
+
+            <p>Administrator Email:</p>
+            <input type="email" id="adminEmail" value="admin@skpasig.ph" required>
+
+            <p><button type="submit">Save Settings</button></p>
+        </form>
+    </section>
+
+    <hr>
+    <p>SK Pinagbuhatan Tournament Manager | 2026</p>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll("section").forEach(function(page) {
+                page.hidden = true;
+            });
+
+            document.getElementById(pageId).hidden = false;
+        }
+
+        function logout() {
+            if (confirm("Are you sure you want to log out?")) {
+                showPage("login");
+            }
+        }
+
+        function addTeam(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("teamName").value;
+            const table = document.getElementById("teamTable");
+            const row = table.insertRow();
+
+            row.insertCell(0).textContent =
+                "TM" + String(table.rows.length - 1).padStart(3, "0");
+            row.insertCell(1).textContent = name;
+            row.insertCell(2).textContent = "Active";
+
+            event.target.reset();
+        }
+
+        function addTournament(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("tournamentName").value;
+            const sport = document.getElementById("sport").value;
+            const table = document.getElementById("tournamentTable");
+            const row = table.insertRow();
+
+            row.insertCell(0).textContent =
+                "T00" + table.rows.length;
+            row.insertCell(1).textContent = name;
+            row.insertCell(2).textContent = sport;
+            row.insertCell(3).textContent = "Active";
+
+            event.target.reset();
+        }
+
+        function addMatch(event) {
+            event.preventDefault();
+
+            const team1 = document.getElementById("team1").value;
+            const team2 = document.getElementById("team2").value;
+            const date = document.getElementById("matchDate").value;
+            const venue = document.getElementById("matchVenue").value;
+            const table = document.getElementById("matchTable");
+            const row = table.insertRow();
+
+            row.insertCell(0).textContent =
+                "M" + String(table.rows.length).padStart(3, "0");
+            row.insertCell(1).textContent = team1;
+            row.insertCell(2).textContent = team2;
+            row.insertCell(3).textContent = date;
+            row.insertCell(4).textContent = venue;
+
+            event.target.reset();
+        }
+
+        function addVenue(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("venueName").value;
+            const location = document.getElementById("venueLocation").value;
+            const table = document.getElementById("venueTable");
+            const row = table.insertRow();
+
+            row.insertCell(0).textContent =
+                "V" + String(table.rows.length).padStart(3, "0");
+            row.insertCell(1).textContent = name;
+            row.insertCell(2).textContent = location;
+            row.insertCell(3).textContent = "Available";
+
+            event.target.reset();
+        }
+
+        function saveSettings(event) {
+            event.preventDefault();
+            alert("Settings saved for this session.");
+        }
+
+        showPage("login");
+    </script>
+
+</body>
+</html>
