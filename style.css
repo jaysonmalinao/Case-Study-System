@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    background: white;
+    color: #333;
+    margin: 20px;
+    font-size: 12px;
+}
+h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+nav {
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+nav button {
+    font-size: 10px;
+    padding: 4px 7px;
+    margin-right: 3px;
+    background: #eee;
+    border: 1px solid #bbb;
+    cursor: pointer;
+}
+nav button:hover {
+    background: #ddd;
+}
+section {
+    display: none;
+}
+section.active {
+    display: block;
+}
+h3 {
+    font-size: 14px;
+    margin-top: 15px;
+}
+table {
+    border-collapse: collapse;
+    font-size: 11px;
+    margin-top: 10px;
+}
+th, td {
+    border: 1px solid #aaa;
+    padding: 5px;
+    text-align: left;
+}
+th {
+    background: #eee;
+}
+input, select {
+    font-size: 11px;
+    padding: 4px;
+    margin: 3px;
+}
+.content {
+    margin-top: 15px;
+}
